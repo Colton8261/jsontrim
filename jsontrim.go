@@ -346,46 +346,102 @@ func (t *Trimmer) trimFields(v interface{}, depth int) interface{} {
 }
 
 // enforceTotal iteratively applies strategy until under limit.
+// Optimization: Marshals once at start, then subtracts size of removed items.
 func (t *Trimmer) enforceTotal(v interface{}) interface{} {
-	for {
-		encoded, err := json.Marshal(v)
-		if err != nil {
-			return v
-		}
-		if len(encoded) <= t.cfg.TotalLimit {
-			return v
-		}
+	// Initial precise measurement
+	encoded, err := json.Marshal(v)
+	if err != nil {
+		return v
+	}
+	currentSize := len(encoded)
 
+	if currentSize <= t.cfg.TotalLimit {
+		return v
+	}
+
+	// Track if we ran out of options to prevent infinite recursion
+	hitDeadEnd := false
+
+	for currentSize > t.cfg.TotalLimit {
 		toRemove := t.cfg.Strategy.SelectNextToRemove(v)
 		if toRemove == "" {
+			hitDeadEnd = true
 			break
 		}
 
 		switch vv := v.(type) {
 		case map[string]interface{}:
 			if !strings.HasPrefix(toRemove, "idx:") {
-				if t.cfg.ReplaceWithMarker && vv[toRemove] != Marker {
-					vv[toRemove] = Marker
-				} else {
-					delete(vv, toRemove)
+				if val, ok := vv[toRemove]; ok {
+					// Calculate reduction
+					removedSize := 0
+					if t.cfg.ReplaceWithMarker && val != Marker {
+						// Replacing value with Marker
+						// Cost was: "key":VALUE
+						// New Cost: "key":"[TRIMMED]"
+						valBytes, _ := json.Marshal(val)
+						// delta = len(valBytes) - len(Marker) - 2 (quotes if marker is string)
+						// Actually simpler: we just track the delta of the value part.
+						// "key": val -> "key": "Marker"
+						// Delta is len(val) - len(Marker_with_quotes)
+						removedSize = len(valBytes) - (len(Marker) + 2)
+						vv[toRemove] = Marker
+					} else {
+						// Removing entirely
+						// Cost was: "key":VALUE,
+						valBytes, _ := json.Marshal(val)
+						// Size = len(key) + 2(quotes) + 1(colon) + len(val) + 1(comma)
+						// Note: The comma logic is imperfect (last item has no comma), but we are conservative.
+						// We assume worst case (middle item) to ensure we don't under-trim,
+						// but actually for `currentSize` tracking, it's safer to UN-der estimate reduction
+						// so we keep trimming.
+						// Let's count: len(key) + 2("") + 1(:) + len(val)
+						// We intentionally ignore the comma to be conservative (under-counting reduction),
+						// forcing us to maybe remove one extra item rather than stop too early.
+						removedSize = len(toRemove) + 3 + len(valBytes)
+						delete(vv, toRemove)
+					}
+					currentSize -= removedSize
 				}
 			}
 		case []interface{}:
 			if strings.HasPrefix(toRemove, "idx:") {
 				var idx int
 				if _, err := fmt.Sscanf(toRemove[4:], "%d", &idx); err == nil && idx >= 0 && idx < len(vv) {
-					// Use ReplaceWithMarker if enabled and not already a marker
-					if t.cfg.ReplaceWithMarker && vv[idx] != Marker {
+					removedSize := 0
+					val := vv[idx]
+
+					if t.cfg.ReplaceWithMarker && val != Marker {
+						valBytes, _ := json.Marshal(val)
+						// Replacing: value -> "Marker"
+						removedSize = len(valBytes) - (len(Marker) + 2)
 						vv[idx] = Marker
 					} else {
-						copy(vv[idx:], vv[idx+1:]) // Shift elements left
-						vv = vv[:len(vv)-1]        // Slice off the last element
-						v = vv                     // Update reference
+						// Removing entirely: value,
+						valBytes, _ := json.Marshal(val)
+						// We estimate reduction as just the value.
+						// Ignoring comma/bracket overhead is conservative.
+						removedSize = len(valBytes)
+						// Slice remove
+						copy(vv[idx:], vv[idx+1:])
+						vv = vv[:len(vv)-1]
+						v = vv
 					}
+					currentSize -= removedSize
 				}
 			}
 		}
 	}
+
+	// Final verification check (Recursion)
+	// Only recurse if we didn't hit a dead end (to avoid infinite loop)
+	if !hitDeadEnd {
+		encodedCheck, _ := json.Marshal(v)
+		if len(encodedCheck) > t.cfg.TotalLimit {
+			return t.enforceTotal(v)
+		}
+	}
+
 	return v
 }
 
